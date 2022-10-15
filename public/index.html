@@ -57,6 +57,8 @@
 				socket.emit("message-to-server", {
 					text: newMessage,
 				});
+
+				txtMessage.value = "";
 			});
 
 			socket.on("message-from-server", (data) => {
