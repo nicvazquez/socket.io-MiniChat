@@ -1,28 +1,5 @@
-// Express server
-const express = require("express");
-const app = express();
+const Server = require("./models/server");
 
-// Sockets server
-const server = require("http").createServer(app);
+const server = new Server();
 
-// Socket server configuration
-const io = require("socket.io")(server);
-
-// Deploy public directory
-app.use(express.static(__dirname + "/public"));
-
-io.on("connection", (socket) => {
-	// socket.emit("welcome-message", {
-	// 	msg: "Welcome to the server",
-	// 	date: new Date(),
-	// });
-
-	socket.on("message-to-server", (data) => {
-		console.log(data);
-		io.emit("message-from-server", data);
-	});
-});
-
-server.listen(8080, () => {
-	console.log("Server running ...");
-});
+server.execute();

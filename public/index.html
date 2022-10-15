@@ -62,17 +62,6 @@
 			socket.on("message-from-server", (data) => {
 				messages.innerHTML += `<li>${data.text}</li>`;
 			});
-
-			// socket.on("welcome-message", (data) => {
-			// 	console.log("The server has emitted something:", data);
-			// });
-
-			// setTimeout(() => {
-			// 	socket.emit("client-message", {
-			// 		msg: "Client",
-			// 		name: "Fernando",
-			// 	});
-			// }, 2000);
 		</script>
 	</body>
 </html>
