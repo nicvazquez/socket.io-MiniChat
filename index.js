@@ -12,12 +12,15 @@ const io = require("socket.io")(server);
 app.use(express.static(__dirname + "/public"));
 
 io.on("connection", (socket) => {
-	socket.emit("welcome-message", {
-		msg: "Welcome to the server",
-		date: new Date(),
-	});
+	// socket.emit("welcome-message", {
+	// 	msg: "Welcome to the server",
+	// 	date: new Date(),
+	// });
 
-	socket.on("client-message", (data) => console.log(data));
+	socket.on("message-to-server", (data) => {
+		console.log(data);
+		io.emit("message-from-server", data);
+	});
 });
 
 server.listen(8080, () => {

@@ -19,22 +19,18 @@
 		<form id="myForm">
 			<div class="row">
 				<div class="col-8">
-					<input type="text" id="msgTxt" placeholder="Message" class="form-control" />
+					<input type="text" id="txtMsg" placeholder="Message" class="form-control" />
 				</div>
 
 				<div class="col-4">
-					<div class="btn btn-primary">Send</div>
+					<button type="submit" class="btn btn-primary">Send</button>
 				</div>
 			</div>
 		</form>
 
 		<div class="row">
 			<div class="col">
-				<ul id="myMessages" class="mt-2">
-					<li>Hello</li>
-					<li>World</li>
-					<li>Nicolas</li>
-				</ul>
+				<ul id="myMessages" class="mt-2"></ul>
 			</div>
 		</div>
 
@@ -51,10 +47,25 @@
 			// DOM elements references
 			const form = document.querySelector("#myForm");
 			const messages = document.querySelector("#myMessages");
+			const txtMessage = document.querySelector("#txtMsg");
 
-			socket.on("welcome-message", (data) => {
-				console.log("The server has emitted something:", data);
+			form.addEventListener("submit", (e) => {
+				e.preventDefault();
+
+				const newMessage = txtMessage.value;
+
+				socket.emit("message-to-server", {
+					text: newMessage,
+				});
 			});
+
+			socket.on("message-from-server", (data) => {
+				messages.innerHTML += `<li>${data.text}</li>`;
+			});
+
+			// socket.on("welcome-message", (data) => {
+			// 	console.log("The server has emitted something:", data);
+			// });
 
 			// setTimeout(() => {
 			// 	socket.emit("client-message", {
