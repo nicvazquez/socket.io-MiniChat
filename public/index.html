@@ -17,7 +17,11 @@
 		></script>
 
 		<script>
-			io("http://localhost:8080");
+			const socket = io("http://localhost:8080");
+
+			socket.on("welcome-message", (data) => {
+				console.log("The server has emitted something:", data);
+			});
 		</script>
 	</body>
 </html>
