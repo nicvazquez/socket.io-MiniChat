@@ -16,6 +16,8 @@ io.on("connection", (socket) => {
 		msg: "Welcome to the server",
 		date: new Date(),
 	});
+
+	socket.on("client-message", (data) => console.log(data));
 });
 
 server.listen(8080, () => {
